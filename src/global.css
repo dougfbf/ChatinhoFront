@@ -1,0 +1,19 @@
+:root {
+    --navBg: #1E1E29;
+    --bgColor: #232330;
+    --navSize: 3rem;
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #FFFFFF;
+    background-color: var(--bgColor);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.down {
+    position: fixed;
+}
