@@ -28,7 +28,7 @@ const MessagesContainer = styled.ul`
 
 const JL = styled.li`
     font-size: 0.7rem;
-    
+    margin-top: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,11 +66,7 @@ const MyMsg = styled.li`
 
 const UserColor = styled.span`
     font-weight: bold;
-     background: linear-gradient(to bottom left, #00FFFF, #0069FF);
-    -webkit-background-clip: text; /* For Safari */
-    -webkit-text-fill-color: transparent; /* For Safari */
-    background-clip: text;
-    color: transparent;
+    color: #00FFFF;
 `
 
 const Caraio = styled.div`
@@ -111,9 +107,13 @@ export default function Chat() {
         const audio = new Audio(ReceiveSound)
         audio.play()
     }
+    function formatDate(dt) {
+        let date = new Date(dt)
+        return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    }
     useEffect(() => {
         const socket = io('https://chatinhoserver.onrender.com', { transports: ['websocket'] })
-        //const socket = io('http://192.168.3.13:3000/', { transports: ['websocket'] })
+        //const socket = io('http://192.168.100.57:3000/', { transports: ['websocket'] })
         setUseSocket(socket)
         scrollBottom()
         socket.emit('clientConnection', { user: localStorage.getItem('user') })
@@ -139,21 +139,21 @@ export default function Chat() {
             <MessagesContainer>
                 {
                     msgs.map((msg) => {
-                        if (msg.type === 'joined') {
+                        /*if (msg.type === 'joined') {
                             return <JL style={{background: 'transparent'}}><p><GreenColor>{msg.user} entrou!</GreenColor> ({msg.date})</p></JL>
                         }
                         else if (msg.type === 'left') {
                             return <JL style={{background: 'transparent'}}><p><RedColor>{msg.user} saiu!</RedColor> ({msg.date})</p></JL>
+                        }*/
+                        if (msg.type === 'serverUpdate') {
+                            return <JL style={{background: 'transparent'}}><p><Server>SERVIDOR REINICIADO:</Server> {formatDate(msg.date)}</p></JL>
                         }
-                        else if (msg.type === 'serverUpdate') {
-                            return <JL style={{background: 'transparent'}}><p><Server>servidor reiniciado:</Server> {getDate()}</p></JL>
-                        }
-                        else {
+                        else if (msg.type === 'msg') {
                             if (msg.user === localStorage.getItem('user')) {
                                 return <MyMsg>{msg.text}</MyMsg>
                             }
                             else if (msg.type === 'msg') {
-                                return <TheirMsg><p><UserColor>{msg.user}:</UserColor> {msg.text}</p></TheirMsg>
+                                return <TheirMsg><p><UserColor>{msg.user}</UserColor>: {msg.text}</p></TheirMsg>
                             }
                         }
                     })

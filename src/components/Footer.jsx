@@ -86,9 +86,11 @@ export default function Footer({ usersOnline }) {
                 isOpen && (
                     <UsersTab>
                         <TextShow>Usuários online agora</TextShow>
-                        {usersOnline.map((user) => {
-                            return <li>{user.name}</li>
-                        })}
+                        {
+                            usersOnline.map((user) => {
+                                return <li>{user.name}</li>
+                            })
+                        }
                         <ButtonD onClick={closeDialog}><strong>FECHAR</strong></ButtonD>
                     </UsersTab>
                 )

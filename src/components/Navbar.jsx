@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Logo from '../assets/Logo.png';
-import Cross from '../assets/Cross.png';
-import Fiau from '../assets/fiau.mp3'
+import Sair from '../assets/sair.png';
 
 const Nav = styled.nav`
     background-color: var(--navBg);
@@ -64,21 +63,15 @@ export default function Navbar({ isLogged, setIsLogged }) {
         setIsLogged(false);
     }
 
-    function PlayFiau() {
-        const audio = new Audio(Fiau)
-        audio.play()
-    }
-
     return (
         <Nav>
             <NavItem>
                 <img src={Logo} alt="Logo" />
                 <p className="text gradient">Chatinho</p>
-                <img onClick={PlayFiau} src='https://em-content.zobj.net/source/noto-emoji-animations/344/glowing-star_1f31f.gif' alt='Glowing Star' />
             </NavItem>
             <NavItem>
                 {isLogged ? (
-                    <img className='cross' onClick={handleLogOff} src={Cross} alt="Cross" />
+                    <img className='cross' onClick={handleLogOff} src={Sair} alt="Sair" />
                 ) : null}
             </NavItem>
         </Nav>

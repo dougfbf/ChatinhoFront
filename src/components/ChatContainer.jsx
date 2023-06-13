@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import SendSound from '../assets/SendSound.mp3'
+import Enviar from '../assets/enviar.png'
 
 const ChatForm = styled.form`
     position: fixed;
@@ -19,21 +20,28 @@ const ChatForm = styled.form`
         border: none;
         padding: 0 1rem 0;
         flex-grow: 1;
-        border-radius: 2rem 0 0 2rem;
+        /*border-radius: 2rem 0 0 2rem;*/
         margin: 0.25rem 0 0.25rem 0.25rem;
+    }
+    input::placeholder {
+        font-weight: bold;
+        color: #3f3f3f
     }
     input:focus {
         outline: none;
     }
     button {
-        background: linear-gradient(to bottom left, #00FFFF, #0069FF);
+        background: #c0ffff;
         border: none;
         padding: 0.5rem;
         margin: 0.25rem 0.25rem 0.25rem 0;
-        border-radius: 0 2rem 2rem 0;
+        /*border-radius: 0 2rem 2rem 0;*/
         outline: none;
         font-weight: bold;
         color: #000000;
+        img {
+            height: 110%;
+        }
     }
 `
 
@@ -68,7 +76,7 @@ export default function ChatContainer({ socket }) {
     return (
         <>
             <ChatForm>
-                <input ref={inputRef} type="text" value={msgValue} placeholder="Digite sua mensagem..." autoComplete="off" onChange={changeHandler} /><button onClick={sendMsg}>Enviar</button>
+                <input ref={inputRef} type="text" value={msgValue} placeholder="Digite sua mensagem..." autoComplete="off" onChange={changeHandler} /><button onClick={sendMsg}><img src={Enviar}/></button>
             </ChatForm>
         </>
     )
